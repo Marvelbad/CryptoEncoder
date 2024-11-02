@@ -1,10 +1,9 @@
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Encrypted {
-    public static void encrypt() {
+    public void encrypt() {
         CaesarCipher cipher = new CaesarCipher();
 
         Scanner scanner = new Scanner(System.in);
@@ -18,10 +17,21 @@ public class Encrypted {
         System.out.println("Введите адрес, куда записать результат: ");
         String dst = scanner.nextLine();
 
-        try (FileReader fileReader = new FileReader(src)) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(src));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(dst))) {
+
+            while (reader.ready()) {
+                String strLine = reader.readLine();
+
+                String encrypt = cipher.encrypt(strLine, key);
+
+                writer.write(encrypt);
+                writer.newLine();
+            }
         }
         catch (IOException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("Содержимое файла зашифровано.");
     }
 }
