@@ -19,7 +19,7 @@ public class Menu {
 
             switch (answer) {
                 case "1" -> new Encrypted().encrypt();
-                case "2" -> System.out.printf("2. Расшифровать текст: ");
+                case "2" -> new Decrypted().decrypt();
                 case "3" -> System.out.printf("3. Расшифровать текст: ");
                 case "4" -> System.out.printf("4. Расшифровать текст: ");
                 case "5" -> {
