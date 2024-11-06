@@ -6,11 +6,7 @@ public class EncryptedDecrypted {
         CaesarCipher cipher = new CaesarCipher();
 
         Scanner scanner = new Scanner(System.in);
-        if (flag) {
-            System.out.println("Введите файл для его зашифровки: ");
-        } else {
-            System.out.println("Введите файл для его расшифровки: ");
-        }
+        System.out.println(flag ? "Введите файл для его зашифровки: " : "Введите файл для его расшифровки: ");
         String src = scanner.nextLine();
 
 
@@ -25,13 +21,7 @@ public class EncryptedDecrypted {
 
             while (reader.ready()) {
                 String strLine = reader.readLine();
-                String result = null;
-                if (flag) {
-                    result = cipher.encrypt(strLine, key);
-                } else {
-                   result = cipher.decrypt(strLine, key);
-                }
-
+                String result = flag ? cipher.encrypt(strLine, key) : cipher.decrypt(strLine, key);
 
                 writer.write(result);
                 writer.newLine();
