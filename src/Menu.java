@@ -18,8 +18,8 @@ public class Menu {
             String answer = scanner.nextLine();
 
             switch (answer) {
-                case "1" -> new Encrypted().encrypt();
-                case "2" -> new Decrypted().decrypt();
+                case "1" -> new EncryptedDecrypted().encryptedDecrypted(true);
+                case "2" -> new EncryptedDecrypted().encryptedDecrypted(false);
                 case "3" -> System.out.printf("3. Расшифровать текст: ");
                 case "4" -> System.out.printf("4. Расшифровать текст: ");
                 case "5" -> {
