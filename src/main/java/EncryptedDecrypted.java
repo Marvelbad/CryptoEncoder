@@ -1,7 +1,12 @@
+import lombok.SneakyThrows;
+
 import java.io.*;
 import java.util.Scanner;
 
+
 public class EncryptedDecrypted {
+
+    @SneakyThrows
     public void encryptedDecrypted(boolean flag) {
         CaesarCipher cipher = new CaesarCipher();
 
@@ -27,9 +32,7 @@ public class EncryptedDecrypted {
                 writer.newLine();
             }
         }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
         System.out.println("Содержимое файла зашифровано.");
     }
 }
