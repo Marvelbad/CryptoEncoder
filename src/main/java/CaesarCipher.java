@@ -3,7 +3,6 @@ public class CaesarCipher {
             "абвгдеёжзийклмнопрстуфхцчшщъыьэюя" + "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" +
             ".,\":!? +-*/\\@#$%^&(){}[];'|`~=_©«»—" + "0123456789";
 
-
     public String encrypt(String message, int key) {
         StringBuilder result = new StringBuilder();
 
@@ -11,7 +10,6 @@ public class CaesarCipher {
             int position = ALPHABET.indexOf(letter);
             if (position >= 0) {
                 int newPosition = (position + key) % ALPHABET.length();
-               // result.append(ALPHABET.charAt(newPosition < 0 ? newPosition + ALPHABET.length() : newPosition));
                 result.append(ALPHABET.charAt(newPosition + (newPosition < 0 ? ALPHABET.length() : 0)));
             }
         }
@@ -20,5 +18,9 @@ public class CaesarCipher {
 
     public String decrypt(String message, int key) {
         return encrypt(message, -key);
+    }
+
+    public int getAlphabetLength() {
+        return ALPHABET.length();
     }
 }
