@@ -6,12 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Parsing {
+    private static final String SPECIAL_CHARS = " ,.!?-";
 
     @SneakyThrows
     public void pars() {
-        ConsoleHelper.writeMessage("Enter file path to decrypt: ");
+        ConsoleHelper.writeMessage("Введите путь к файлу для расшифровки: ");
         String src = ConsoleHelper.readString();
-        ConsoleHelper.writeMessage("Введите адрес к файлу для набоора статистики: ");
+
+        ConsoleHelper.writeMessage("Введите адрес к файлу для набора статистики: ");
         String stat = ConsoleHelper.readString();
 
         Map<Character, Integer> mapSrc = new HashMap<>();
@@ -19,16 +21,14 @@ public class Parsing {
         BufferedReader buf = new BufferedReader(reader);
         while (buf.ready()) {
             String text = buf.readLine();
-            char[] symbols = text.toCharArray();
-            for (char sym : symbols) {
-                if (!mapSrc.containsKey(sym)) {
-                    mapSrc.put(sym, 1);
+            for (char symbol : text.toCharArray()) {
+                if (!mapSrc.containsKey(symbol)) {
+                    mapSrc.put(symbol, 1);
                 } else {
-                    int value = mapSrc.get(sym);
-                    mapSrc.put(sym, value + 1);
+                    int value = mapSrc.get(symbol);
+                    mapSrc.put(symbol, value + 1);
                 }
             }
         }
-//сделать все то же самое с stat!!!!!
     }
 }
