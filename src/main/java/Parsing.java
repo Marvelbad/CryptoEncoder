@@ -9,26 +9,36 @@ public class Parsing {
     private static final String SPECIAL_CHARS = " ,.!?-";
 
     @SneakyThrows
-    public void pars() {
+    public void parse() {
         ConsoleHelper.writeMessage("Введите путь к файлу для расшифровки: ");
         String src = ConsoleHelper.readString();
 
         ConsoleHelper.writeMessage("Введите адрес к файлу для набора статистики: ");
         String stat = ConsoleHelper.readString();
 
-        Map<Character, Integer> mapSrc = new HashMap<>();
-        FileReader reader = new FileReader(src);
-        BufferedReader buf = new BufferedReader(reader);
-        while (buf.ready()) {
-            String text = buf.readLine();
-            for (char symbol : text.toCharArray()) {
-                if (!mapSrc.containsKey(symbol)) {
-                    mapSrc.put(symbol, 1);
-                } else {
-                    int value = mapSrc.get(symbol);
-                    mapSrc.put(symbol, value + 1);
+        Map<Character, Integer> mapSrc = analyzeFile(src);
+        Map<Character, Integer> mapStat = analyzeFile(stat);
+    }
+
+    @SneakyThrows
+    private Map<Character, Integer> analyzeFile(String filePath) {
+        Map<Character, Integer> charMap = new HashMap<>();
+        try (BufferedReader buf = new BufferedReader(new FileReader(filePath))) {
+            while (buf.ready()) {
+                String text = buf.readLine();
+                for (char symbol : text.toCharArray()) {
+                    if (Character.isLetterOrDigit(symbol) || SPECIAL_CHARS.contains(String.valueOf(symbol))) {
+
+                        if (!charMap.containsKey(symbol)) {
+                            charMap.put(symbol, 1);
+                        } else {
+                            int value = charMap.get(symbol);
+                            charMap.put(symbol, value + 1);
+                        }
+                    }
                 }
             }
         }
+        return charMap;
     }
 }
