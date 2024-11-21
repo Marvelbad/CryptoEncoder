@@ -18,6 +18,19 @@ public class Parsing {
 
         Map<Character, Integer> mapSrc = analyzeFile(src);
         Map<Character, Integer> mapStat = analyzeFile(stat);
+
+        while (true) {
+            ConsoleHelper.writeMessage("Текст выглядит правильно? (yes/no): ");
+            String answer = ConsoleHelper.readString().toLowerCase();
+
+            if (answer.equals("yes")) {
+                ConsoleHelper.writeMessage("Отлично! Заканчиваем работу.");
+                break;
+            } else if (answer.equals("no")) {
+                ConsoleHelper.writeMessage("Продолжаем подбор...");
+            }
+            break;
+        }
     }
 
     @SneakyThrows
