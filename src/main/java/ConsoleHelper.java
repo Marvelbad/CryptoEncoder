@@ -26,6 +26,20 @@ public class ConsoleHelper {
     }
 
     public static Path buildFileName(String path, String suffix) {
-        return null;
+        Path fullPath = Path.of(path);
+        String fileName = fullPath.getFileName().toString();
+        String newFileName;
+
+        if (fileName.contains(".")) {
+            int lastIndex = fileName.lastIndexOf(".");
+            String nameWithoutExtension = fileName.substring(0, lastIndex);
+            String extension = fileName.substring(lastIndex);
+            newFileName = nameWithoutExtension + suffix + extension;
+        } else {
+            newFileName = fileName + suffix;
+        }
+
+        return fullPath.getParent().resolve(newFileName);
     }
+
 }
