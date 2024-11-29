@@ -19,8 +19,8 @@ public class Menu {
             switch (answer) {
                 case "1" -> new EncryptedDecrypted().encryptedDecrypted(true);
                 case "2" -> new EncryptedDecrypted().encryptedDecrypted(false);
-                case "3" -> System.out.printf("3. Расшифровать текст: ");
-                case "4" -> System.out.printf("4. Расшифровать текст: ");
+                case "3" -> new BruteForce().bruteForce();
+                case "4" -> new Parsing().parse();
                 case "5" -> {
                     return;
                 }
