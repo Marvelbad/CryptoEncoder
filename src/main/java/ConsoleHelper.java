@@ -36,6 +36,7 @@ public class ConsoleHelper {
             String extension = fileName.substring(lastIndex);
             newFileName = nameWithoutExtension + suffix + extension;
         } else {
+
             newFileName = fileName + suffix;
         }
 
