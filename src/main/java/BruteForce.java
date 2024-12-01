@@ -45,12 +45,7 @@ public class BruteForce {
             }
         }
 
-        boolean hasPunctuation = text.contains(". ") ||
-                text.contains(", ") ||
-                text.contains("! ") ||
-                text.contains("? ");
-
-        if (!hasPunctuation) {
+        if (!text.contains(". ") && !text.contains(", ") && !text.contains("! ") && !text.contains("? ")) {
             return false;
         }
 
@@ -59,18 +54,12 @@ public class BruteForce {
         ConsoleHelper.writeMessage(preview);
 
         while (true) {
-            ConsoleHelper.writeMessage("Текст выглядит правильно? (Yes/No)");
-            String answer = ConsoleHelper.readString().trim().toLowerCase();
+            ConsoleHelper.writeMessage("Текст выглядит правильно? (Yes/No):");
+            String answer = ConsoleHelper.readString().trim();
 
-            switch (answer) {
-                case "yes":
-                    return true;
-                case "no": {
-                    return false;
-                }
-                default:
-                    ConsoleHelper.writeMessage(" Пожалуйста, введите только Yes или No!");
-            }
+            if (answer.equalsIgnoreCase("yes")) return true;
+            if (answer.equalsIgnoreCase("no")) return false;
+            ConsoleHelper.writeMessage("Пожалуйста, введите только Yes или No!");
         }
     }
 }
