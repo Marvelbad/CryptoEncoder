@@ -45,12 +45,12 @@ public class BruteForce {
             }
         }
 
-        if (!text.contains(". ") && !text.contains(", ") && !text.contains("! ") && !text.contains("? ")) {
+        if (!text.matches(".*[.!?,] .*")) {
             return false;
         }
 
         ConsoleHelper.writeMessage("Фрагмент расшифрованного текста:");
-        ConsoleHelper.writeMessage(text.substring(0, 80) + "...");
+        ConsoleHelper.writeMessage(text.length() > 80 ? text.substring(0, 80) + "..." : text);
 
         while (true) {
             ConsoleHelper.writeMessage("Текст выглядит правильно? (Yes/No):");
