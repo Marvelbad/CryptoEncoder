@@ -17,7 +17,7 @@ public class BruteForce {
 
         CaesarCipher caesarCipher = new CaesarCipher();
 
-
+//Проблема переноса строки! Пофиксить!!!!!!!!! с 21 по 37 строки!!!!
         try (BufferedReader reader = new BufferedReader(new FileReader(src))) {
             StringBuilder fullText = new StringBuilder();
             while (reader.ready()) {
@@ -44,6 +44,33 @@ public class BruteForce {
                 return false;
             }
         }
-        return true;
+
+        boolean hasPunctuation = text.contains(". ") ||
+                text.contains(", ") ||
+                text.contains("! ") ||
+                text.contains("? ");
+
+        if (!hasPunctuation) {
+            return false;
+        }
+
+        ConsoleHelper.writeMessage("Фрагмент расшифрованного текста:");
+        String preview = text.length() > 100 ? text.substring(0, 100) + "..." : text;
+        ConsoleHelper.writeMessage(preview);
+
+        while (true) {
+            ConsoleHelper.writeMessage("Текст выглядит правильно? (Yes/No)");
+            String answer = ConsoleHelper.readString().trim().toLowerCase();
+
+            switch (answer) {
+                case "yes":
+                    return true;
+                case "no": {
+                    return false;
+                }
+                default:
+                    ConsoleHelper.writeMessage(" Пожалуйста, введите только Yes или No!");
+            }
+        }
     }
 }

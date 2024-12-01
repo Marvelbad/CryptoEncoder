@@ -2,8 +2,7 @@ import lombok.SneakyThrows;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.nio.file.Path;
 import java.nio.file.Files;
 
@@ -42,5 +41,12 @@ public class Parsing {
         return map;
     }
 
+
+    private List<Map.Entry<Character, Integer>> mapToList(Map<Character, Integer> map) {
+        Set<Map.Entry<Character, Integer>> entries = map.entrySet();
+        List<Map.Entry<Character, Integer>> list = new ArrayList<>(entries);
+
+        Comparator<Map.Entry<Character, Integer>> comparator =
+    }  //НЕ ТРОГАТь!!!
 
 }
