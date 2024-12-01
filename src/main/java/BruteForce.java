@@ -50,8 +50,7 @@ public class BruteForce {
         }
 
         ConsoleHelper.writeMessage("Фрагмент расшифрованного текста:");
-        String preview = text.length() > 100 ? text.substring(0, 100) + "..." : text;
-        ConsoleHelper.writeMessage(preview);
+        ConsoleHelper.writeMessage(text.substring(0, 80) + "...");
 
         while (true) {
             ConsoleHelper.writeMessage("Текст выглядит правильно? (Yes/No):");
