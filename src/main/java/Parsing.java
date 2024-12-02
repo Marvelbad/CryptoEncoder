@@ -3,23 +3,21 @@ import lombok.SneakyThrows;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
-import java.nio.file.Path;
-import java.nio.file.Files;
 
 public class Parsing {
 
     @SneakyThrows
     public void parse() {
-        ConsoleHelper.writeMessage("Введите путь к файлу для расшифровки: ");
+        ConsoleHelper.printMessage("Введите путь к файлу для расшифровки: ");
         String src = ConsoleHelper.readString();
 
-        ConsoleHelper.writeMessage("Введите адрес к файлу для набора статистики: ");
+        ConsoleHelper.printMessage("Введите адрес к файлу для набора статистики: ");
         String stat = ConsoleHelper.readString();
 
         Map<Character, Integer> mapSrc = fillMapWithValues(src);
         Map<Character, Integer> mapStat = fillMapWithValues(stat);
 
-        ConsoleHelper.writeMessage("Расшифрованный текст:");
+        ConsoleHelper.printMessage("Расшифрованный текст:");
     }
 
     @SneakyThrows
@@ -46,7 +44,11 @@ public class Parsing {
         Set<Map.Entry<Character, Integer>> entries = map.entrySet();
         List<Map.Entry<Character, Integer>> list = new ArrayList<>(entries);
 
-        Comparator<Map.Entry<Character, Integer>> comparator =
-    }  //НЕ ТРОГАТь!!!
+        Comparator<Map.Entry<Character, Integer>> comparator = Map.Entry.comparingByValue();
+
+        list.sort(comparator.reversed());
+        return list;
+//        return map.entrySet().stream().sorted(Map.Entry.<Character,Integer>comparingByValue().reversed()).toList();
+    }
 
 }
