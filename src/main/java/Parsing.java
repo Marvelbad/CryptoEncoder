@@ -1,7 +1,9 @@
 import lombok.SneakyThrows;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.*;
 
 public class Parsing {
@@ -17,7 +19,15 @@ public class Parsing {
         Map<Character, Integer> mapSrc = fillMapWithValues(src);
         Map<Character, Integer> mapStat = fillMapWithValues(stat);
 
-        ConsoleHelper.printMessage("Расшифрованный текст:");
+        List<Map.Entry<Character, Integer>> listSrc = mapToList(mapSrc);
+        List<Map.Entry<Character, Integer>> listStat = mapToList(mapStat);
+
+        Map<Character, Character> decryptedMap = new HashMap<>();
+        for (int i = 0; i < listSrc.size(); i++) {
+            decryptedMap.put(listSrc.get(i).getKey(), listStat.get(i).getKey());
+        }
+        try (BufferedReader reader = new BufferedReader(new FileReader(src)));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(stat))
     }
 
     @SneakyThrows
