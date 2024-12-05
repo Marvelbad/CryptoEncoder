@@ -12,7 +12,7 @@ public class ConsoleHelper {
     private ConsoleHelper() {
     }
 
-    public static void writeMessage(String message) {
+    public static void printMessage(String message) {
         System.out.println(message);
     }
 

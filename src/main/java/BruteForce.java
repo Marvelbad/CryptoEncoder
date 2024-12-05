@@ -2,16 +2,16 @@ import lombok.SneakyThrows;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class BruteForce {
     private static final int MAX_WORD_LENGTH = 28;
     private static final String WORD_SEPARATOR_REGEX = "\\s";
+    private static final int SIZE_TEXT = 80;
 
     @SneakyThrows
     public void bruteForce() {
-        ConsoleHelper.writeMessage("Enter file path: ");
+        ConsoleHelper.printMessage("Enter file path: ");
         String src = ConsoleHelper.readString();
         Path dst = ConsoleHelper.buildFileName(src, "_bruteForce");
 
@@ -29,7 +29,7 @@ public class BruteForce {
                 String decrypt = caesarCipher.decrypt(entireText, i);
                 if (isValidate(decrypt)) {
                     //Files.writeString(dst, decrypt);
-                    ConsoleHelper.writeMessage("Успешная расшифровка с ключом: " + i);
+                    ConsoleHelper.printMessage("Успешная расшифровка с ключом: " + i);
                     return;
                 }
             }
@@ -45,20 +45,23 @@ public class BruteForce {
             }
         }
 
-        if (!text.matches(".*[.!?,] .*")) {
-            return false;
+        boolean isValidate = false;
+
+        if (text.matches(".*[.!?,]+ .*")) {
+            isValidate = true;
         }
 
-        ConsoleHelper.writeMessage("Фрагмент расшифрованного текста:");
-        ConsoleHelper.writeMessage(text.length() > 80 ? text.substring(0, 80) + "..." : text);
+        while (isValidate) {
+            ConsoleHelper.printMessage("Фрагмент расшифрованного текста:");
+            ConsoleHelper.printMessage(text.length() > SIZE_TEXT ? text.substring(0, 80) + "..." : text);  // refactor SIZE_TEXT name!
 
-        while (true) {
-            ConsoleHelper.writeMessage("Текст выглядит правильно? (Yes/No):");
+            ConsoleHelper.printMessage("Текст выглядит правильно? (Yes/No):");
             String answer = ConsoleHelper.readString().trim();
 
             if (answer.equalsIgnoreCase("yes")) return true;
-            if (answer.equalsIgnoreCase("no")) return false;
-            ConsoleHelper.writeMessage("Пожалуйста, введите только Yes или No!");
+            if (answer.equalsIgnoreCase("no")) isValidate = false;
+            ConsoleHelper.printMessage("Пожалуйста, введите только Yes или No!");
         }
+        return false;
     }
 }

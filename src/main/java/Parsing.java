@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 public class Parsing {
@@ -13,8 +15,11 @@ public class Parsing {
         ConsoleHelper.printMessage("Введите путь к файлу для расшифровки: ");
         String src = ConsoleHelper.readString();
 
+
         ConsoleHelper.printMessage("Введите адрес к файлу для набора статистики: ");
         String stat = ConsoleHelper.readString();
+
+        Path dst = ConsoleHelper.buildFileName(src, "_parsing");
 
         Map<Character, Integer> mapSrc = fillMapWithValues(src);
         Map<Character, Integer> mapStat = fillMapWithValues(stat);
@@ -26,8 +31,21 @@ public class Parsing {
         for (int i = 0; i < listSrc.size(); i++) {
             decryptedMap.put(listSrc.get(i).getKey(), listStat.get(i).getKey());
         }
-        try (BufferedReader reader = new BufferedReader(new FileReader(src)));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(stat))
+        try (BufferedReader reader = new BufferedReader(new FileReader(src));
+             BufferedWriter writer = Files.newBufferedWriter((dst))) {
+
+            while (reader.ready()) {
+                StringBuilder builder = new StringBuilder();
+                String someText = reader.readLine();
+                char[] chars = someText.toCharArray();
+                for (int i = 0; i < chars.length; i++) {
+                    char aChar = chars[i];
+                    Character decryptedChar = decryptedMap.get(aChar);
+                    builder.append(decryptedChar);
+                }
+                writer.write(builder.toString());
+            }
+        }
     }
 
     @SneakyThrows

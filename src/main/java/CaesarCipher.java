@@ -3,6 +3,12 @@ public class CaesarCipher {
             "абвгдеёжзийклмнопрстуфхцчшщъыьэюя" + "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" +
             ".,\":!? +-*/\\@#$%^&(){}[];'|`~=_©«»—" + "0123456789";
 
+    /**
+     * Метод шифроания Цезаря где используются строка и ключ
+     * @param message - текст для зашифровки
+     * @param key - число на которое нужно сделать сдвиг по ALPHABET
+     * @return - результирующее значение в виде строки
+     */
     public String encrypt(String message, int key) {
         StringBuilder result = new StringBuilder();
 

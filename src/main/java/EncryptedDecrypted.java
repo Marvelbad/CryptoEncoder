@@ -1,6 +1,8 @@
 import lombok.SneakyThrows;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 
@@ -18,11 +20,10 @@ public class EncryptedDecrypted {
         System.out.println("Введите ключ: ");
         int key = Integer.parseInt(scanner.nextLine());
 
-        System.out.println("Введите адрес, куда записать результат: ");
-        String dst = scanner.nextLine();
+        Path dst = ConsoleHelper.buildFileName(src, (flag ? "_encrypt" : "_decrypt"));
 
         try (BufferedReader reader = new BufferedReader(new FileReader(src));
-             BufferedWriter writer = new BufferedWriter(new FileWriter(dst))) {
+             BufferedWriter writer = Files.newBufferedWriter(dst)) {
 
             while (reader.ready()) {
                 String strLine = reader.readLine();
