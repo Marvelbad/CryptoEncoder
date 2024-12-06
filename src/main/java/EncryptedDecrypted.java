@@ -34,6 +34,6 @@ public class EncryptedDecrypted {
             }
         }
 
-        System.out.println("Содержимое файла зашифровано.");
+        ConsoleHelper.printMessage(flag ? "Содержимое файла зашифровано: " : "Содержимое файла расшифровано: ");
     }
 }
