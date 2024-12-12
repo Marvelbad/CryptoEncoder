@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class Menu {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
         while (true) {
             System.out.println("""
@@ -14,7 +13,7 @@ public class Menu {
                     5. Выход из программы:\s
                     """);
 
-            String answer = scanner.nextLine();
+            String answer = ConsoleHelper.readString();
 
             switch (answer) {
                 case "1" -> new EncryptedDecrypted().encryptedDecrypted(true);

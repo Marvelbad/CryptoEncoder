@@ -1,8 +1,12 @@
 import lombok.SneakyThrows;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 public class BruteForce {
     private static final int MAX_WORD_LENGTH = 28;
@@ -17,24 +21,33 @@ public class BruteForce {
 
         CaesarCipher caesarCipher = new CaesarCipher();
 
-//Проблема переноса строки! Пофиксить!!!!!!!!! с 21 по 37 строки!!!!
-        try (BufferedReader reader = new BufferedReader(new FileReader(src))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(src));
+             BufferedWriter writer = Files.newBufferedWriter(dst)) {
+
+            ArrayList<String> encryptedList = new ArrayList<>();
             StringBuilder fullText = new StringBuilder();
             while (reader.ready()) {
                 String line = reader.readLine();
-                fullText.append(line).append("\n");
+                encryptedList.add(line);
+                fullText.append(line).append(System.lineSeparator());
             }
-            String entireText = fullText.toString();
+
+
             for (int i = 0; i < caesarCipher.getAlphabetLength(); i++) {
-                String decrypt = caesarCipher.decrypt(entireText, i);
+                String decrypt = caesarCipher.decrypt(fullText.toString(), i);
+
                 if (isValidate(decrypt)) {
-                    //Files.writeString(dst, decrypt);
+                    for (String str : encryptedList) {
+                        String strEncrypt = caesarCipher.decrypt(str, i);
+                        writer.write(strEncrypt);
+                        writer.newLine();
+                    }
+
                     ConsoleHelper.printMessage("Успешная расшифровка с ключом: " + i);
-                    return;
+                    break;
                 }
             }
         }
-
     }
 
     private boolean isValidate(String text) {
@@ -59,8 +72,8 @@ public class BruteForce {
             String answer = ConsoleHelper.readString().trim();
 
             if (answer.equalsIgnoreCase("yes")) return true;
-            if (answer.equalsIgnoreCase("no")) isValidate = false;
-            ConsoleHelper.printMessage("Пожалуйста, введите только Yes или No!");
+            else if (answer.equalsIgnoreCase("no")) isValidate = false;
+            else ConsoleHelper.printMessage("Пожалуйста, введите только Yes или No!");
         }
         return false;
     }

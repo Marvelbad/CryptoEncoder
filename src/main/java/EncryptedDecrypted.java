@@ -12,13 +12,15 @@ public class EncryptedDecrypted {
     public void encryptedDecrypted(boolean flag) {
         CaesarCipher cipher = new CaesarCipher();
 
-        Scanner scanner = new Scanner(System.in);
+       // Scanner scanner = new Scanner(System.in);
         System.out.println(flag ? "Введите файл для его зашифровки: " : "Введите файл для его расшифровки: ");
-        String src = scanner.nextLine();
+        String src = ConsoleHelper.readString();
+       // String src = scanner.nextLine();
 
 
         System.out.println("Введите ключ: ");
-        int key = Integer.parseInt(scanner.nextLine());
+        int key = ConsoleHelper.readInt();
+       // int key = Integer.parseInt(scanner.nextLine());
 
         Path dst = ConsoleHelper.buildFileName(src, (flag ? "_encrypt" : "_decrypt"));
 

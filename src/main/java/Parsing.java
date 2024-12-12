@@ -44,6 +44,7 @@ public class Parsing {
                     builder.append(decryptedChar);
                 }
                 writer.write(builder.toString());
+                writer.newLine();
             }
         }
     }
