@@ -12,29 +12,16 @@ public class EncryptedDecrypted {
     public void encryptedDecrypted(boolean flag) {
         CaesarCipher cipher = new CaesarCipher();
 
-       // Scanner scanner = new Scanner(System.in);
         System.out.println(flag ? "Введите файл для его зашифровки: " : "Введите файл для его расшифровки: ");
         String src = ConsoleHelper.readString();
-       // String src = scanner.nextLine();
-
 
         System.out.println("Введите ключ: ");
         int key = ConsoleHelper.readInt();
-       // int key = Integer.parseInt(scanner.nextLine());
 
         Path dst = ConsoleHelper.buildFileName(src, (flag ? "_encrypt" : "_decrypt"));
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(src));
-             BufferedWriter writer = Files.newBufferedWriter(dst)) {
-
-            while (reader.ready()) {
-                String strLine = reader.readLine();
-                String result = flag ? cipher.encrypt(strLine, key) : cipher.decrypt(strLine, key);
-
-                writer.write(result);
-                writer.newLine();
-            }
-        }
+        String content = Files.readString(Path.of(src));
+        Files.writeString(dst, flag ? cipher.encrypt(content, key) : cipher.decrypt(content, key));
 
         ConsoleHelper.printMessage(flag ? "Содержимое файла зашифровано: " : "Содержимое файла расшифровано: ");
     }
