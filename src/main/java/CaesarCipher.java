@@ -7,7 +7,7 @@ public class CaesarCipher {
      * Метод шифроания Цезаря где используются строка и ключ
      * @param message - текст для зашифровки
      * @param key - число на которое нужно сделать сдвиг по ALPHABET
-     * @return - результирующее значение в виде строки
+     * @return - результирующее значение в виде строк
      */
     public String encrypt(String message, int key) {
         StringBuilder result = new StringBuilder();
